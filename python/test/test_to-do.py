@@ -14,9 +14,18 @@ expected_list ="""1. Item 1
 
 class TestTodoList():
     
-    def test_list_tasks(self, capsys):
+    def test_list_tasks(self):
         todo.TASK_FILE = "test/test_list.txt"
         task_list = todo.list_tasks()
         assert task_list == expected_list
+
+    def test_remove_task(self):
+        pass
+
+    def test_add_task(self):
+        pass
+
+    def test_main(self):
+        pass
         
 
