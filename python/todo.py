@@ -1,35 +1,28 @@
 import argparse
 import os
 
-
-def create_parser():
-    parser = argparse.ArgumentParser(description="Command-line Todo List App")
-    parser.add_argument("-a", "--add", metavar="", help="Add a new task")
-    parser.add_argument("-l", "--list", action="store_true", help="List all tasks")
-    parser.add_argument("-r", "--remove", metavar="", help="Remove a task by index")
-    return parser
-
+TASK_FILE = ".tasks.txt"
 
 def add_task(task):
-    with open("tasks.txt", "a") as file:
+    with open(TASK_FILE, "a", encoding="utf-8") as file:
         file.write(task + "\n")
 
-
 def list_tasks():
-    if os.path.exists("tasks.txt"):
-        with open("tasks.txt", "r") as file:
+    output_string = ""
+    if os.path.exists(TASK_FILE):
+        with open(TASK_FILE, "r", encoding="utf-8") as file:
             tasks = file.readlines()
             for index, task in enumerate(tasks, start=1):
-                print(f"{index}. {task.strip()}")
-    else:
-        print("No tasks found.")
+                output_string += (f"{index}. {task.strip()}\n")
+    return output_string.strip()
+        
 
 
 def remove_task(index):
-    if os.path.exists("tasks.txt"):
-        with open("tasks.txt", "r") as file:
+    if os.path.exists(TASK_FILE):
+        with open(TASK_FILE, "r", encoding="utf-8") as file:
             tasks = file.readlines()
-        with open("tasks.txt", "w") as file:
+        with open(TASK_FILE, "w", encoding="utf-8") as file:
             for i, task in enumerate(tasks, start=1):
                 if i != index:
                     file.write(task)
@@ -39,7 +32,22 @@ def remove_task(index):
 
 
 def main():
-    parser = create_parser()
+    parser = argparse.ArgumentParser(description="Command-line Todo List")
+    parser.add_argument(
+            "-a",
+            "--add",
+            help="Add a new task"
+            )
+    parser.add_argument(
+            "-l",
+            "--list",
+            action="store_true",
+            help="List all tasks")
+    parser.add_argument(
+            "-r",
+            "--remove",
+            help="Remove a task by index")
+
     args = parser.parse_args()
 
     if args.add:
