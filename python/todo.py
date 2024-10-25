@@ -53,7 +53,8 @@ def main():
     if args.add:
         add_task(args.add)
     elif args.list:
-        list_tasks()
+        tasks = list_tasks()
+        print(tasks)
     elif args.remove:
         remove_task(int(args.remove))
     else:
