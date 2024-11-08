@@ -26,7 +26,7 @@ def remove_task(index):
             for i, task in enumerate(tasks, start=1):
                 if i != index:
                     file.write(task)
-        print("Task removed successfully.")
+        print("Task removed.")
     else:
         print("No tasks found.")
 
