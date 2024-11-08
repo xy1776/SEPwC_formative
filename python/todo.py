@@ -11,11 +11,11 @@ def add_task(task):
     """
 
 def list_tasks():
-    pass
+    return
 
 
 def remove_task(index):
-    pass
+    return
 
 def main():
     parser = argparse.ArgumentParser(description="Command-line Todo List")
