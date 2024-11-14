@@ -40,6 +40,7 @@ remove_task <- function(index) {
 }
 
 main <- function(args) {
+
   if (!is.null(args$add)) {
     add_task(args$add)
   } else if (args$list) {
