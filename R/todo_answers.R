@@ -6,15 +6,37 @@ suppressPackageStartupMessages({
 TASK_FILE <- ".tasks.txt" # nolint
 
 add_task <- function(task) {
-
+  write(task, file = TASK_FILE, append = TRUE, sep = "\n")
 }
 
 list_tasks <- function() {
-
+  if (file.exists(TASK_FILE)) {
+    tasks <- readLines(TASK_FILE)
+    output_string <- paste(seq_along(tasks), tasks, sep = ". ", collapse = "\n")
+    return(output_string)
+  } else {
+    return("No tasks found.")
+  }
 }
 
 remove_task <- function(index) {
 
+  tasks <- NA
+  if (file.exists(TASK_FILE)) {
+    tasks <- readLines(TASK_FILE)
+  } else {
+    stop("File not found")
+  }
+  if (index <= length(tasks)) {
+    tasks <- tasks[-index]
+    if (identical(tasks, character(0))) {
+      stop("Task not found")
+    }
+    writeLines(tasks, TASK_FILE)
+    print("Task removed.")
+  } else {
+    stop("No tasks found.")
+  }
 }
 
 main <- function(args) {
